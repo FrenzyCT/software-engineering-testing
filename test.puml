@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor Bruker
+
+Bruker -> Presentasjonslag: Velger å betale
+Presentasjonslag -> Applikasjonslag: Initiere betaling
+Applikasjonslag -> Datalag: Hent betalingsinformasjon
+Datalag -> Betalingssystem: Send betalingsforespørsel
+Betalingssystem -> Bank: Utfør betalingstransaksjon
+Bank --> Betalingssystem: Bekreft betaling
+
+alt Betaling vellykket
+    Betalingssystem -> Applikasjonslag: Send bekreftelse til applikasjonen
+    Applikasjonslag -> Presentasjonslag: Oppdater brukergrensesnitt med bekreftelse
+    Presentasjonslag -> Bruker: Vis bekreftelse for vellykket betaling
+else Betaling mislykkes
+    Betalingssystem -> Applikasjonslag: Send feilmelding til applikasjonen
+    Applikasjonslag -> Presentasjonslag: Vis feilmelding til bruker
+    Presentasjonslag -> Bruker: Vis feilmelding for mislykket betaling
+end
+
+@enduml

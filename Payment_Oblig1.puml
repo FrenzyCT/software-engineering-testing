@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor Customer
+Customer --> Login: Create profile
+Login --> Application: Verifies user access
+Application --> Customer: Verifies access level
+Application --> Paymentsystem: Asks for bankcard information
+Paymentsystem --> Bank: sends request for payment
+Bank --> BankID: request confirmation from customerID
+
+alt Payment Identification
+    BankID -> Customer: ask for verification of transaction
+    Customer -> BankID: Verifies ID
+end
+
+alt payment successful
+    Paymentsystem --> Application: send confirmation of payment
+    Application --> Login: Grant access for paid content
+    Login --> Customer: Show verification for successful payment
+else payment failed
+    Paymentsystem --> Application: message "error payment"
+    Application --> Customer: message customer "unsuccessful payment"
+end
+@enduml

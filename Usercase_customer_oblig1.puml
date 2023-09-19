@@ -1,0 +1,47 @@
+@startuml
+
+:User: -> (Login)
+(Login) -> (Startsite)
+
+(Startsite) -> (Login)
+(Startsite) --> (Options)
+
+(Options) --> (End subscription)
+(Options) --> (Start subscription)
+(Options) --> (parentcontroll)
+(Options) --> (payment)
+
+(payment) -> (reedem coupon)
+(payment) --> (bankcard)
+(bankcard) --> :Bank:
+
+(Startsite) --> (Movies)
+(Startsite) --> (Series)
+(Startsite) --> (Documentaries)
+(Startsite) -> (Search)
+
+(Search) ..> (Movies)
+(Search) ..> (Series)
+(Search) ..> (Documentaries)
+
+(Movies) --> (start show)
+(Series) --> (start show)
+(Documentaries) --> (start show)
+
+(start show) --> (Pause)
+(start show) --> (skip)
+(start show) --> (save in "favorites")
+(save in "favorites") .. (Startsite)
+
+note right of (Search)
+genre, name, actors
+end note
+
+note right of (Startsite)
+scrolling through"
+end note
+note "verification of user" as N2
+(Login) .. N2
+(Startsite) .. N2
+
+@enduml

@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+actor Admin
+actor customer
+rectangle Access_To_Program {
+  customer -- (Profiles)
+  (payment) .> (Verifications) : extends
+  (Profiles) .> (payment) : include
+  (Profiles) -- Admin
+}
+
+left to right direction
+:Admin: --> (Create category)
+(Admin) --> (Update Movies/Series/Documentaries)
+(Admin) --> (Update reviews)
+(Admin) --> (Update Software)
+
+
+
+
+@enduml
